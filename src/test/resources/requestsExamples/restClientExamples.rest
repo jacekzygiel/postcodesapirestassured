@@ -1,0 +1,9 @@
+# POSTCODES-API
+
+@baseUri = http://api.postcodes.io
+@lookupEndpoint = /postcodes
+@validPostCode = B92 7BD
+
+### Postcodes lookup
+GET {{baseUri}}{{lookupEndpoint}}/{{validPostCode}}
+
