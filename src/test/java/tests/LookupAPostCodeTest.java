@@ -3,14 +3,31 @@ package tests;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static utils.TestData.getRandomInvalidPostCode;
-import static utils.TestData.getRandomValidPostCode;
 
 public class LookupAPostCodeTest extends BaseTest {
 
     private static final String ENDPOINT = "postcodes/";
+
+    private static final List<String> INVALID_POST_CODES_LIST =
+            new ArrayList<>(Arrays.asList("123 ABC", "O2L5 51A", "XXX 222"));
+
+    private static final List<String> VALID_POST_CODES_LIST =
+            new ArrayList<>(Arrays.asList("B92 7BD", "M32 0JG", "NE30 1DP"));
+
+    private String getRandomValidPostCode() {
+        return VALID_POST_CODES_LIST.get(new Random().nextInt(VALID_POST_CODES_LIST.size()));
+    }
+
+    private String getRandomInvalidPostCode() {
+        return INVALID_POST_CODES_LIST.get(new Random().nextInt(INVALID_POST_CODES_LIST.size()));
+    }
 
     @Test
     public void validateResponseCodeValidPostcode() {

@@ -5,15 +5,22 @@ import org.apache.http.HttpStatus;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasSize;
-import static utils.TestData.INVALID_POST_CODES_LIST;
-import static utils.TestData.VALID_POST_CODES_LIST;
+
 
 public class BulkLookupTest extends BaseTest {
-    private final String ENDPOINT = "postcodes/";
+    private static final String ENDPOINT = "postcodes/";
+
+    private static final List<String> INVALID_POST_CODES_LIST =
+            new ArrayList<>(Arrays.asList("123 ABC", "O2L5 51A", "XXX 222"));
+
+    private static final List<String> VALID_POST_CODES_LIST =
+            new ArrayList<>(Arrays.asList("B92 7BD", "M32 0JG", "NE30 1DP"));
 
     @Test
     public void validateResponseStatusValidPostCodes() {
@@ -39,7 +46,7 @@ public class BulkLookupTest extends BaseTest {
                 .post()
         .then()
                 .statusCode(HttpStatus.SC_OK)
-        .body("result", hasSize(VALID_POST_CODES_LIST.size()));
+                .body("result", hasSize(VALID_POST_CODES_LIST.size()));
     }
 
     @Test
