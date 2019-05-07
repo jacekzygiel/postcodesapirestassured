@@ -1,5 +1,3 @@
-package tests;
-
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 
@@ -31,13 +29,11 @@ public class LookupAPostCodeTest extends BaseTest {
 
     @Test
     public void validateResponseCodeValidPostcode() {
-        String validPostCode = getRandomValidPostCode();
-
         given()
                 .baseUri(BASE_URI)
                 .basePath(ENDPOINT)
         .when()
-                .get(validPostCode)
+                .get(getRandomValidPostCode())
         .then()
                 .statusCode(HttpStatus.SC_OK);
     }

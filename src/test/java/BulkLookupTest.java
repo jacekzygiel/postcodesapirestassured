@@ -1,5 +1,3 @@
-package tests;
-
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.json.JSONObject;
@@ -36,7 +34,7 @@ public class BulkLookupTest extends BaseTest {
     }
 
     @Test
-    public void validateStatusCodeAndResultSizeExistingPostCodes() {
+    public void validateStatusCodeAndResultArrayElementsExistingPostCodes() {
         given()
                 .baseUri(BASE_URI)
                 .basePath(ENDPOINT)
@@ -50,7 +48,7 @@ public class BulkLookupTest extends BaseTest {
     }
 
     @Test
-    public void validateStatusCodeAndResultsSizeNotExistingPostCodes() {
+    public void validateStatusCodeAndResultArraySizeNotExistingPostCodes() {
         given()
                 .baseUri(BASE_URI)
                 .basePath(ENDPOINT)
@@ -91,12 +89,6 @@ public class BulkLookupTest extends BaseTest {
     private String getRequestBody(List<String> elementsList) {
         return new JSONObject()
                 .put("postcodes", elementsList)
-                .toString();
-    }
-
-    private String getRequestBody(String element) {
-        return new JSONObject()
-                .put("postcodes", element)
                 .toString();
     }
 }

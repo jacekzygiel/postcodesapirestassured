@@ -1,5 +1,3 @@
-package tests;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
@@ -12,17 +10,17 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 
-public class NearestPostCodesForGeo extends BaseTest {
+public class NearestPostCodesForGeoTest extends BaseTest {
 
     private static final String ENDPOINT = "postcodes?lon={lon}&lat={lat}";
 
-    public static final Map<String, Object> VALID_GPS_DATA = Stream.of(
+    private static final Map<String, Object> VALID_GPS_DATA = Stream.of(
             new AbstractMap.SimpleEntry<>("lon", "0.629834723775309"),
             new AbstractMap.SimpleEntry<>("lat", "51.7923246977375"),
             new AbstractMap.SimpleEntry<>("postCodes", new ArrayList<>(Arrays.asList("CM8 1EF", "CM8 1EU", "CM8 1PH", "CM8 1PQ"))))
             .collect(Collectors.toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
-    public static final List<String> COORDINATES_OUTSIDE_UK = new ArrayList<>(Arrays.asList("50.049683", "19.944544"));
+    private static final List<String> COORDINATES_OUTSIDE_UK = new ArrayList<>(Arrays.asList("50.049683", "19.944544"));
 
     @Test
     public void validateCorrectUKCoordinates() {

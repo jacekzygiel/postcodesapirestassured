@@ -1,5 +1,3 @@
-package tests;
-
 import org.junit.jupiter.api.BeforeAll;
 
 import java.io.IOException;
